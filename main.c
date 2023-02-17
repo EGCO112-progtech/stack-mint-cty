@@ -22,17 +22,32 @@
         case'{':
         case'[':push(&s,argv[i][j]); break;
                 break;
-        case'}':if(pop(&s)!='{') N=1;break;
-        case']':if(pop(&s)!='[') N=1;break;
+        case'}':if(pop(&s)!='{') { 
+          if(0N=1;break;
+        case']':
+          x=pop(&s);
+          if(x == '{')
+            N = 1;
+          else
+            N = 2;
+          else N = 0;
+          break;
+          default :
+          printf("Non of condition\n");
           }
-       if(N==1) break;
+       if(N==1) 
+         break;
       }
     if(s.size>0){
     printf("argv %d: Incorrect too many open parenthesis\n",i);
     pop_all(&s);
-      }
-    else if(N==0)printf("argv %d: Correct\n",i);
-    else printf("argv %d: Incorrect mismatch\n",i); 
+      } else if(N==0)
+      printf("argv %d: Correct\n",i);
+    else if(N==1)
+        printf("argv %d: Incorrect mismatch\n",i); 
+    else 
+        printf("argv %d: Incorrect too many close parenthesis\n",i);
+        pop_all(&s);
     }
     
 /*while(top){

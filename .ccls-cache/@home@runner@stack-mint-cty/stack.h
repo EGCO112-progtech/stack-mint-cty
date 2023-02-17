@@ -30,7 +30,7 @@ char value = t->data;//(*top)->data
   return 0;
 }
 void pop_all(StackPtr s){
- while(s->size>0){
+ while(s->top != NULL){
 pop(s);
    //printf("%d\n",pop(s));
  }
