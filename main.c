@@ -16,10 +16,24 @@
  // NodePtr *top=NULL;
     
   for(i=1;i<argc;i++){
-    push(&s,atoi(argv[i]));
+    N=0;
+    for(j=0;j<strlen(argv[i]);j++){
+      switch(argv[i][j]){
+        case'{':
+        case'[':push(&s,argv[i][j]); break;
+                break;
+        case'}':if(pop(&s)!='{') N=1;break;
+        case']':if(pop(&s)!='[') N=1;break;
+          }
+       if(N==1) break;
+      }
+    if(s.size>0){
+    printf("argv %d: Incorrect too many open parenthesis\n",i);
+    pop_all(&s);
+      }
+    else if(N==0)printf("argv %d: Correct\n",i);
+    else printf("argv %d: Incorrect mismatch\n",i); 
     }
-    
-  pop_all(&s);
     
 /*while(top){
  printf("%d\n",pop(&top));
@@ -50,4 +64,6 @@
 }  */
 
    return 0;
+  
     }
+
